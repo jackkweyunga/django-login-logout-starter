@@ -1,0 +1,74 @@
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>{% block head_title %}{% endblock %}</title>
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    {% endcompress %}
+
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
+
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body class="dark:bg-gray-900 w-screen overflow-x-hidden">
+    {% block body %}
+
+    <nav class="bg-white border-b border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+      <div class="container flex flex-wrap justify-between items-center mx-auto">
+        <a href="/" class="flex items-center">
+            <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Home Tutor</span>
+        </a>
+        
+
+        <div class="flex px-3 items-center md:order-2">
+              <ul class="py-1 flex" aria-labelledby="user-menu-button">
+                {% if user.is_authenticated %}
+                <li><a class="block border rounded-lg py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" href="{% url 'account_email' %}">Change E-mail</a></li>
+                <li><a class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" href="{% url 'account_logout' %}">Sign Out</a></li>
+                {% else %}
+                <li><a class="block border rounded-lg py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" href="{% url 'account_login' %}">Sign In</a></li>
+                <li><a class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" href="{% url 'account_signup' %}">Sign Up</a></li>
+                {% endif %}
+              </ul>
+        </div>
+        
+    </div>
+
+    </nav>
+
+    {% if messages %}
+    <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+        {% for message in messages %}
+        <span class="font-medium"></span> {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="h-full w-screen overflow-x-hidden flex flex-col items-center justify-center">
+
+      <div class="flex flex-col h-full justify-between p-4 bg-white rounded-lg sm:p-6 lg:p-8 dark:bg-gray-800 ">        
+  
+    {% block content %}
+    {% endblock %}
+
+    </div>
+    </div>
+
+    {% endblock %}
+
+    {% block extra_body %}
+    {% endblock %}
+
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    {% block scripts %} {% endblock %}
+    
+  </body>
+</html>
