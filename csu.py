@@ -41,7 +41,7 @@ def createSuperUser( password=config("DJANGO_ADMIN_PASSWORD"), username=config("
         super_email = EmailAddress(user, user.email, True, True) 
         super_email.save()
     except:
-        print("Super email created: ")
+        print("Super email not created: ")
     
     return user
 
