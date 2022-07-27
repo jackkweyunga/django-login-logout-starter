@@ -11,6 +11,8 @@ The project uses tailwindcss with its Flowbite components, making nodejs a depen
 
 ## Steps on contributing.
 
+After forking the project:
+
 - First of all decide which feature/bugfix/hotfix you will be adding/or working on.
 
 - Use git flow to create a feature/bugfix/hotfix branch.
