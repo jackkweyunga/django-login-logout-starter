@@ -1,0 +1,42 @@
+{% extends 'custom_base.html' %}
+
+
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('#toggleSidebarMobile').click(() => {
+      // $('#sidebar').toggleClass("-translate-x-full");
+      console.log("...");
+    })
+  });
+</script>
+{% endblock %}
+
+{% block _content %}
+
+<!-- navbar -->
+{% include 'dashboard/navbar.html'%}
+
+<!-- drawer -->
+{% include 'dashboard/sidebar-mobile.html'%}
+
+<div class=" mx-auto w-full max-w-8xl">
+
+  <div class="lg:flex">
+
+    <!-- sidebar -->
+    {% include 'dashboard/sidebar.html'%}
+
+    <main id="content-wrapper" class=" py-4 w-full min-w-0 lg:static lg:max-h-full lg:overflow-visible">
+      {% block content %}
+      {% include 'dashboard/index_skeleton.html'%}
+      {% endblock %}
+    </main>
+
+  </div>
+
+  {% include 'dashboard/footer.html'%}
+
+</div>
+
+{% endblock %}

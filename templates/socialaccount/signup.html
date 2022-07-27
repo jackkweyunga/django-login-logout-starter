@@ -1,0 +1,41 @@
+{% extends "socialaccount/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+{% load user_extras %}
+    
+<form class="space-y-6 py-4 max-w-sm" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+  {% csrf_token %}
+
+  <h1 class="text-xl font-bold mb-6">{% trans "Sign Up" %}</h1>
+
+  <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+  {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+
+  {% if form.errors %}
+    <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+        <span class="font-medium">{{ form.errors }}</span>
+    </div>
+  {% endif %}
+
+  <div class="w-full">
+    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ form.email.label }}</label>
+    {{ form.email | add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" }}
+  </div>
+
+  <div class="w-full">
+    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ form.username.label }}</label>
+    {{ form.username | add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" }}
+  </div>
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+
+{% endblock %}
