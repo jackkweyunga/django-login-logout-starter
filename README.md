@@ -15,20 +15,20 @@ A starter template for a django project requiring user account functionalities s
 Create a virtual environment
 
 ```
-    python3 -m venv venv
-    source venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 python development requirements
 
 ```shell
-    python3 -m pip install -r requirements-dev.txt
+python3 -m pip install -r requirements-dev.txt
 ```
 
 css and js requirements / node modules.
 
 ```shell
-    npm i
+npm i
 ```
 
 ### Environment Variables
@@ -77,17 +77,17 @@ Make sure the SITE ID corresponds to a site available in the database.
 Run Migrations
 
 ```shell
-    python3 -m python manage.py migrate
+python3 -m python manage.py migrate
 ```
 
 Create the django superuser
 
 ```shell
-    python3 -m python csu.py
+python3 -m python csu.py
 ```
 
 Run the application
 
 ```shell
-    python3 -m python manage.py runserver
+python3 -m python manage.py runserver
 ```
