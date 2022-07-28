@@ -4,7 +4,7 @@ from dj_database_url import parse as db_url
 from decouple import config
 import os
 import datetime
-import django_heroku
+# import django_heroku
 
 
 from django.core.management.utils import get_random_secret_key
@@ -18,8 +18,7 @@ SECRET_KEY = 'django-insecure-%!ucjsng+joe#bp%xo=lqum2f!7hz!uw)p*akyne-audps(xaw
 
 DEBUG = config("DEBUG", default=1, cast=bool)
 
-
-SITE_NAME="My Site"
+SITE_NAME = config("SITE_NAME", default="Django Login Logout")
 
 
 ALLOWED_HOSTS = ['*']
@@ -279,6 +278,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
-
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
