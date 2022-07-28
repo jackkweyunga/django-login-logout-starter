@@ -60,7 +60,16 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL=""
 
 ~~~~~~~~~~
 
-Fill in the values to according to your case. Google variables can be obtained from the `Google Developers Console`. In case your application uses `HTTPS` , set ACCOUNT_DEFAULT_HTTP_PROTOCOL = "HTTPS". Make sure the SITE ID corresponds to a site available in the database.
+Fill in the values to according to your case. Google variables can be obtained from the `Google Developers Console`. Set Authorized redirect URIs as follows.
+```
+http://127.0.0.1:8000/accounts/google/login/callback/
+```
+
+In case your application uses `HTTPS` , set:
+```
+ACCOUNT_DEFAULT_HTTP_PROTOCOL="HTTPS"
+```
+Make sure the SITE ID corresponds to a site available in the database.
 
 
 ## Run the applications
