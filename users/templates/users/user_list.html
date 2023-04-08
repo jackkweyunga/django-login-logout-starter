@@ -1,14 +1,6 @@
 {% extends 'dashboard/base.html' %}
 
 
-{% block title %} Home | Tutors {% endblock %}
-
-
-{% block meta %}
-<meta type="description"
-    content="Home tutor brings the student closer to the tutor, and the tutor close to the student" />
-<meta name="keywords" content="teachers tz, walimu tz, shule, Home tutor">
-{% endblock %}
 
 
 {% block content %}
@@ -37,7 +29,7 @@
                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                         clip-rule="evenodd"></path>
                 </svg>
-                <a href="{% url 'users:user-list'  %}"
+                <a href="{{user.get_list_url}}"
                     class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">users</a>
             </div>
         </li>
@@ -134,8 +126,8 @@
                 </td>
                 <th scope="row" class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full"
-                        src="https://eu.ui-avatars.com/api/?name={{ object.first_name }}+{{ object.last_name }}&size=250"
-                        alt="Jese image">
+                        src="{{object.profile_pic_url}}"
+                        alt="profile picture">
                     <div class="pl-3">
                         <div class="text-base font-semibold">{{ object.username }}</div>
                         <div class="font-normal text-gray-500">{{ object.email }}</div>
@@ -151,7 +143,7 @@
                 </td>
                 <td class="py-4 px-6">
                     <!-- Modal toggle -->
-                    <a href="{% url 'users:user-update' object.id %}" type="button" data-modal-toggle="editUserModal"
+                    <a href="{{object.get_update_url}}" type="button" data-modal-toggle="editUserModal"
                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
                 </td>
             </tr>
