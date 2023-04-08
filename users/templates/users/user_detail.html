@@ -2,13 +2,9 @@
 {% extends 'dashboard/base.html' %}
 
 
-{% block title %} Home | Tutors {% endblock %}
+{% block title %} DETAIL | USER {% endblock %}
 
 
-{% block meta %}
-<meta type="description" content="Home tutor brings the student closer to the tutor, and the tutor close to the student" />
-<meta name="keywords" content="teachers tz, walimu tz, shule, Home tutor">
-{% endblock %}
 
 
 {% block content %}
@@ -53,11 +49,11 @@
                 
             </div>
             <div class="flex flex-col items-center pb-10">
-                <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="{{selected_user.profile_pic_url}}"  alt="user photo">
-                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ selected_user.username}}</h5>
+                <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="{{object.profile_pic_url}}"  alt="user photo">
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ object.username}}</h5>
                 <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
                 <div class="flex flex-col space-y-4 mt-4 lg:mt-6">
-                  {% if selected_user == user %}
+                  {% if object == user %}
                     <a href="{% url 'account_change_password' %}" class="inline-flex w-full items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Password change</a>
                     <a href="{% url 'socialaccount_connections' %}" class="inline-flex w-full items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                       Connect Social Accounts
@@ -65,8 +61,8 @@
                   {% endif %}
 
                   {% if user.is_superuser %}
-                  {% if selected_user != user %}
-                    <a href="{% url 'users:user-delete' selected_user.pk %}" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white-900 bg-white rounded-lg border border-red-900 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-900 dark:bg-red-800 dark:text-white dark:border-red-600 dark:hover:bg-red-700 dark:hover:border-red-700 dark:focus:ring-red-700">REMOVE USER</a>
+                  {% if object != user %}
+                    <a href="{% url 'users:user-delete' object.pk %}" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white-900 bg-white rounded-lg border border-red-900 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-900 dark:bg-red-800 dark:text-white dark:border-red-600 dark:hover:bg-red-700 dark:hover:border-red-700 dark:focus:ring-red-700">REMOVE USER</a>
                   {% endif %}
                   
                   {% endif %}
@@ -79,37 +75,63 @@
     <div class="col-span-2">
         <div class="w-full p-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
-        <form method="POST" enctype="multipart/form-data">
+          <div class="bg-white overflow-hidden shadow rounded-lg border">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    User Profile
+                </h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                    This is some information about the user.
+                </p>
+            </div>
+            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            name
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{object.default_username}}
+                        </dd>
+                    </div>
+                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                          username
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                          {{object.username}}
+                        </dd>
+                    </div>
+                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Email address
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{object.email}}
+                        </dd>
+                    </div>
+                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            {{object.phone_number}}
 
-            <h5 class="font-medium text-xl mb-6">General Information</h5>
- 
-            <!-- Security token -->
-            {% csrf_token %}
-         
-            <!-- Using the formset -->
-        
-            <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ form.username.label }}</label>
-                {{ form.username | add_class:'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            (123) 456-7890
+                        </dd>
+                    </div>
+                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Address
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            123 Main St<br>
+                             Anytown, USA 12345
+                        </dd>
+                    </div>
+                </dl>
             </div>
-        
-            <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ form.email.label }}</label>
-                {{ form.email | add_class:'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' }}
-            </div>
-        
-            <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ form.first_name.label }}</label>
-                {{ form.first_name | add_class:'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' }}
-            </div>
-        
-            <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ form.last_name.label }}</label>
-                {{ form.last_name | add_class:'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' }}
-            </div>
-             
-            <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"" value="UPDATE">
-        </form>
+        </div>
+           
 
         </div>
     </div>

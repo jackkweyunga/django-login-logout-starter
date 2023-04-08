@@ -14,11 +14,7 @@
             <div class="flex px-3 items-center md:order-2">
                 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                   <span class="sr-only">Open user menu</span>
-                  {% if user.socialaccount_set.all.0.get_avatar_url %}
-                  <img class="w-8 h-8 rounded-full" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="user photo">
-                  {% else %}
-                  <img class="w-8 h-8 rounded-full" src="https://eu.ui-avatars.com/api/?name={{ user.first_name }}+{{ user.last_name }}&size=250" alt="user photo">
-                  {% endif %}
+                  <img class="w-8 h-8 rounded-full" src="{{user.profile_pic_url}}" alt="user photo">
                 </button>
                 <!-- Dropdown menu -->
                 <div class="hidden z-50 my-4 mx-2 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
@@ -28,7 +24,7 @@
                   </div>
                   <ul class="py-1" aria-labelledby="user-menu-button">
                     <li>
-                      <a href="{% url 'users:user-update' user.pk %}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+                      <a href="{{user.get_update_url}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
                     </li>
                     <div class="border-b w-full border-gray-100"></div>
                     <li>

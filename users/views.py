@@ -42,8 +42,6 @@ class UserUpdateView(LoginRequired, generic.edit.UpdateView):
     
     template_name = "users/user_update.html"
     
-    def form_valid(self, form):
-        return super().form_valid(form)
 
     
 class UserDeleteView(generic.edit.DeleteView):

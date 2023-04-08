@@ -11,9 +11,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% block meta %} {% endblock %}
 
-    <title>{% block title %} Home Tutor {% endblock %}</title>
+
+
+    {% block meta %}
+    <meta type="description" content="describe your webpage" />
+    <meta name="keywords" content="define keywords for search engine separated by comma">
+    {% endblock %}
+
+    <title>{% block title %} Home | My_site {% endblock %}</title>
 
     {% compress css %}
     <link rel="stylesheet" href="{% static 'src/output.css' %}">
@@ -34,7 +40,8 @@
 
 
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {% block scripts %} {% endblock %}
 
 

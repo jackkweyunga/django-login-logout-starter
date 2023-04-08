@@ -1,0 +1,35 @@
+{% load user_extras %}
+
+{% if form.errors %}
+<ul>
+    {% for error in form.non_field_errors %}
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span>
+            <span class="mt-2 text-sm text-red-600 dark:text-red-500">{{ error }}</span></p>
+    {% endfor %}
+</ul>
+    
+{% endif %}
+    
+{% for formfield in form.visible_fields  %}
+<!--form field errors block-->
+
+    {% if formfield.errors %}
+        <ul>
+            {% for error in formfield.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span>
+                    <span class="mt-2 text-sm text-red-600 dark:text-red-500">{{ error }}</span></p>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <div class="mb-6">
+        <label for="{{ formfield.label }}"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ formfield.label }}</label>
+        {{ formfield | add_class_remix }}
+    </div>
+    <!--helper text block-->
+    {% if formfield.help_text %}
+        <br />{{ formfield.help_text }}
+    {% endif %}
+{% endfor %}
