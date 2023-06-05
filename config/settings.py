@@ -78,7 +78,7 @@ SOCIALACCOUNT_PROVIDERS = {
         "APP": {
             "client_id": config("GOOGLE_CLIENT_ID"),
             "secret": config("GOOGLE_CLIENT_SECRET"),
-            "key": config("GOOGLE_CLIENT_KEY"),
+            "key": config("GOOGLE_CLIENT_KEY", default=""),
         },
         # These are provider-specific settings that can only be
         # listed here:
