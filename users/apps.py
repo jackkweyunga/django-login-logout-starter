@@ -6,4 +6,4 @@ class UsersConfig(AppConfig):
     name = 'users'
     
     def ready(self):
-        from .signals import user_profile_update
+        from .signals import update_user_profile_on_social_account_added

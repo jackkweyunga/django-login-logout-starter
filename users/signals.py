@@ -1,22 +1,25 @@
 from django.dispatch import receiver
 from users.models import User
 from allauth.socialaccount.signals import social_account_added
+
+
 @receiver(social_account_added)
-def user_profile_update(request,sociallogin, **kwargs):
+def update_user_profile_on_social_account_added(request, sociallogin, **kwargs):
     """
-    - edit user profile picture url and first & last name from current provider
-    -- only tested in google authentication
+    -> Objective:
+        - To update the user profile when a social account is added.\n
+    -> Flow:
+        - Extracts extra data from the social login account
+        - Checks if the user has provided a first name, last name, and profile picture URL
+        - If not, updates the user's profile with the corresponding data from the social login account
     """
-    try:
-        data=sociallogin.account.extra_data
-        update_fields={}
-        if data:
-            if not sociallogin.user.first_name:
-                update_fields["first_name"]=data.get("given_name","")
-            if not sociallogin.user.last_name:
-                update_fields["last_name"]=data.get("family_name","")
-            update_fields["profile_url"]=sociallogin.get_avatar_url()
-            User.objects.filter(id=sociallogin.user.id).update(**update_fields)
-    except Exception as e:
-        print("data format from social provider is incompatible")
-        pass
+    data = sociallogin.account.extra_data
+    update_fields = {}
+    if data:
+        # fetch username from google account when user provides no name
+        if not sociallogin.user.first_name:
+            update_fields["first_name"] = data.get("given_name", "")
+        if not sociallogin.user.last_name:
+            update_fields["last_name"] = data.get("family_name", "")
+        update_fields["profile_pic_url"] = data.get("picture", "")
+        User.objects.filter(id=sociallogin.user.id).update(**update_fields)
